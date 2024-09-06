@@ -12,6 +12,7 @@ int main(int argc, char **argv) {
   
   ssh_bind_options_set(sshbind, SSH_BIND_OPTIONS_BINDADDR, "localhost"); 
   ssh_bind_options_set(sshbind, SSH_BIND_OPTIONS_BINDPORT, &port); 
+  ssh_bind_options_set(sshbind, SSH_BIND_OPTIONS_HOSTKEY, "/etc/ssh/ssh_host_rsa_key");
 
   if (ssh_bind_listen(sshbind) < 0) {
     printf("Error listening to socket: %s\n", ssh_get_error(sshbind));
