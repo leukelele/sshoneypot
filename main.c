@@ -1,15 +1,17 @@
 #include "config.h"           /* defined macros:
-			       * - addr bound to
-			       * - default port
-			       * - keyfile directory
-			       */
+			                         * - addr bound to
+			                         * - default port
+			                         * - keyfile directory
+			                         */
+
 #include <stdio.h>            /* used for:
                                * - printf
-			       */
+			                         */
+
 #include <libssh/server.h>    /* used for:
                                * - ssh_bind, the data type for ssh server bind
                                * - ssh_bind_options_set, options for ssh server binding
-			       */
+			                         */
 
 
 int main(int argc, char **argv) {
