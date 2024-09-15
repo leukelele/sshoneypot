@@ -13,7 +13,6 @@
                                * - ssh_bind_options_set, options for ssh server binding
 			                         */
 
-
 int main(int argc, char **argv) {
 
   ssh_bind sshbind = ssh_bind_new();
@@ -24,6 +23,13 @@ int main(int argc, char **argv) {
   if (ssh_bind_listen(sshbind) < 0) {
     printf("Error listening to socket: %s\n", ssh_get_error(sshbind));
     return -1;
+  }
+
+  while(1) {
+    if (ssh_bind_accept(sshbind, session) == SSH_ERROR) {
+      fprintf(stderr, "Error accepting a connection: `%s'.\n",ssh_get_error(sshbind));
+      return -1;
+    }
   }
 
   return 0;
