@@ -17,8 +17,8 @@
 
 int main(int argc, char **argv) {
 
-        connection = 
-  ssh_bind sshbind = ssh_bind_new();
+  ssh_session connection = ssh_new();
+        ssh_bind sshbind = ssh_bind_new();
 
   ssh_bind_options_set(sshbind, SSH_BIND_OPTIONS_BINDADDR, LISTENADDR); 
   ssh_bind_options_set(sshbind, SSH_BIND_OPTIONS_BINDPORT, DEFLT_PORT); 
@@ -30,7 +30,7 @@ int main(int argc, char **argv) {
   }
 
   while(1) {
-    if (ssh_bind_accept(sshbind, session) == SSH_ERROR) {
+    if (ssh_bind_accept(sshbind, connection) == SSH_ERROR) {
       fprintf(stderr, "Error accepting a connection: `%s'.\n",ssh_get_error(sshbind));
       return -1;
     }
