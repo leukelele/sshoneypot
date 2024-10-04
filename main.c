@@ -18,20 +18,20 @@
 int main(int argc, char **argv) {
 
   ssh_session connection = ssh_new();
-        ssh_bind sshbind = ssh_bind_new();
+  ssh_bind    server     = ssh_bind_new();
 
-  ssh_bind_options_set(sshbind, SSH_BIND_OPTIONS_BINDADDR, LISTENADDR); 
-  ssh_bind_options_set(sshbind, SSH_BIND_OPTIONS_BINDPORT, DEFLT_PORT); 
-  ssh_bind_options_set(sshbind, SSH_BIND_OPTIONS_HOSTKEY, KEYFILE_DIR);
+  ssh_bind_options_set(server, SSH_BIND_OPTIONS_BINDADDR, LISTENADDR); 
+  ssh_bind_options_set(server, SSH_BIND_OPTIONS_BINDPORT, DEFLT_PORT); 
+  ssh_bind_options_set(server, SSH_BIND_OPTIONS_HOSTKEY, KEYFILE_DIR);
 
-  if (ssh_bind_listen(sshbind) < 0) {
-    printf("Error listening to socket: %s\n", ssh_get_error(sshbind));
+  if (ssh_bind_listen(server) < 0) {
+    printf("Error listening to socket: %s\n", ssh_get_error(server));
     return -1;
   }
 
   while(1) {
-    if (ssh_bind_accept(sshbind, connection) == SSH_ERROR) {
-      fprintf(stderr, "Error accepting a connection: `%s'.\n",ssh_get_error(sshbind));
+    if (ssh_bind_accept(server, connection) == SSH_ERROR) {
+      fprintf(stderr, "Error accepting a connection: `%s'.\n",ssh_get_error(server));
       return -1;
     }
   }
